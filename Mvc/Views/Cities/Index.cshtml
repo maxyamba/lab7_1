@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Mvc.Models.mvcCitiesModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("AddorEdit", "Cities")" class="btn btn-default"><i class="fa fa-plus"></i>  Create new</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id_city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            
+            <th>Actions</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id_city)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.city)
+    </td>
+    
+    <td>
+        <a href="@Url.Action("AddorEdit", "Cities", new { id=item.id_city} )" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
+        <a onclick="Delete(@item.id_city)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
+    </td>
+</tr>
+    }
+
+</table>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Ей', 'Хочеш видалити?', function () {
+                window.location.href='@Url.Action("Delete", "Cities")/' + id;
+            }, null);
+        }
+
+
+    </script>
+}

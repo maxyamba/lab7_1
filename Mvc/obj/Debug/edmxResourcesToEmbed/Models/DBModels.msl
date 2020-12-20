@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище sssModelContainer" CdmEntityContainer="sssEntities">
+    <EntitySetMapping Name="Cinemas">
+      <EntityTypeMapping TypeName="sssModel.Cinemas">
+        <MappingFragment StoreEntitySet="Cinemas">
+          <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+          <ScalarProperty Name="cinema" ColumnName="cinema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="sssModel.Cities">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="id_city" ColumnName="id_city" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="Country_id_country" ColumnName="Country_id_country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="sssModel.Countries">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="id_country" ColumnName="id_country" />
+          <ScalarProperty Name="country" ColumnName="country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cinema">
+      <EntityTypeMapping TypeName="sssModel.Cinema">
+        <MappingFragment StoreEntitySet="Cinema">
+          <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+          <ScalarProperty Name="cinema1" ColumnName="cinema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="City">
+      <EntityTypeMapping TypeName="sssModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="id_city" ColumnName="id_city" />
+          <ScalarProperty Name="city1" ColumnName="city" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Country">
+      <EntityTypeMapping TypeName="sssModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="id_country" ColumnName="id_country" />
+          <ScalarProperty Name="country1" ColumnName="country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CityCinemas" TypeName="sssModel.CityCinemas" StoreEntitySet="CityCinemas">
+      <EndProperty Name="Cinemas">
+        <ScalarProperty Name="id_cinema" ColumnName="Cinema_id_cinema" />
+      </EndProperty>
+      <EndProperty Name="Cities">
+        <ScalarProperty Name="id_city" ColumnName="City_id_city" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

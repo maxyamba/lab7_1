@@ -1,0 +1,31 @@
+﻿@model Mvc.Models.mvcCinemasModel
+@{
+    ViewBag.Title = "AddorEdit";
+}
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.id_cinema)
+
+
+
+        <div class=" form-group">
+            @Html.LabelFor(model => model.cinema)
+            @Html.EditorFor(model => model.cinema)
+            @Html.ValidationMessageFor(model => model.cinema)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button" />
+            <input type="reset" value="Reset" class="btn button" />
+        </div>
+    }
+
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}
+

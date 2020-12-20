@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Mvc.Models.mvcCinemasModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("AddorEdit", "Cinemas")" class="btn btn-default"><i class="fa fa-plus"></i>  Create new</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id_cinema)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cinema)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id_cinema)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cinema)
+            </td>
+            <td>
+                <a href="@Url.Action("AddorEdit", "Cinemas", new { id=item.id_cinema} )" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                <a onclick="Delete(@item.id_cinema)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Ей', 'Хочеш видалити?', function () {
+                window.location.href='@Url.Action("Delete", "Cinemas")/' + id;
+            }, null);
+        }
+
+
+    </script>
+}

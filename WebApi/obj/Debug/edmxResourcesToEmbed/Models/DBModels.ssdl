@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище cinemaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cinema">
+    <Key>
+      <PropertyRef Name="id_cinema" />
+    </Key>
+    <Property Name="id_cinema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cinema" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_city" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cinemas">
+    <Key>
+      <PropertyRef Name="id_cinema" />
+    </Key>
+    <Property Name="id_cinema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cinema" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id_city" Type="int" Nullable="false" />
+    <Property Name="Cinema_id_cinema" Type="int" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="id_city" />
+    </Key>
+    <Property Name="id_city" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id_country" Type="int" Nullable="false" />
+    <Property Name="id_cinema" Type="int" Nullable="false" />
+    <Property Name="City_id_city" Type="int" />
+  </EntityType>
+  <EntityType Name="city">
+    <Key>
+      <PropertyRef Name="id_city" />
+    </Key>
+    <Property Name="id_city" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_country" Type="int" Nullable="false" />
+    <Property Name="id_cinema" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="id_country" />
+    </Key>
+    <Property Name="id_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="country" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Country_id_country" Type="int" />
+  </EntityType>
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="id_country" />
+    </Key>
+    <Property Name="id_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_city" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_cinema_city">
+    <End Role="city" Type="Self.city" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="cinema" Type="Self.cinema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="city">
+        <PropertyRef Name="id_city" />
+      </Principal>
+      <Dependent Role="cinema">
+        <PropertyRef Name="id_city" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_city_country">
+    <End Role="country" Type="Self.country" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="city" Type="Self.city" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country">
+        <PropertyRef Name="id_country" />
+      </Principal>
+      <Dependent Role="city">
+        <PropertyRef Name="id_country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Cinemas_dbo_Cinemas_Cinema_id_cinema">
+    <End Role="Cinemas" Type="Self.Cinemas" Multiplicity="0..1" />
+    <End Role="Cinemas1" Type="Self.Cinemas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinemas">
+        <PropertyRef Name="id_cinema" />
+      </Principal>
+      <Dependent Role="Cinemas1">
+        <PropertyRef Name="Cinema_id_cinema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Cities_dbo_Cities_City_id_city">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+    <End Role="Cities1" Type="Self.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="id_city" />
+      </Principal>
+      <Dependent Role="Cities1">
+        <PropertyRef Name="City_id_city" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище cinemaModelContainer">
+    <EntitySet Name="cinema" EntityType="Self.cinema" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cinemas" EntityType="Self.Cinemas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="city" EntityType="Self.city" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_cinema_city" Association="Self.FK_cinema_city">
+      <End Role="city" EntitySet="city" />
+      <End Role="cinema" EntitySet="cinema" />
+    </AssociationSet>
+    <AssociationSet Name="FK_city_country" Association="Self.FK_city_country">
+      <End Role="country" EntitySet="country" />
+      <End Role="city" EntitySet="city" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Cinemas_dbo_Cinemas_Cinema_id_cinema" Association="Self.FK_dbo_Cinemas_dbo_Cinemas_Cinema_id_cinema">
+      <End Role="Cinemas" EntitySet="Cinemas" />
+      <End Role="Cinemas1" EntitySet="Cinemas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Cities_dbo_Cities_City_id_city" Association="Self.FK_dbo_Cities_dbo_Cities_City_id_city">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Cities1" EntitySet="Cities" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

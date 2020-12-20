@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище sssModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "sss.dbo.Cinema" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Cinema">
+    <Key>
+      <PropertyRef Name="id_cinema" />
+      <PropertyRef Name="cinema" />
+    </Key>
+    <Property Name="id_cinema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cinema" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cinemas">
+    <Key>
+      <PropertyRef Name="id_cinema" />
+    </Key>
+    <Property Name="id_cinema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cinema" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="id_city" />
+    </Key>
+    <Property Name="id_city" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Country_id_country" Type="int" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "sss.dbo.City" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="id_city" />
+      <PropertyRef Name="city" />
+    </Key>
+    <Property Name="id_city" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CityCinemas">
+    <Key>
+      <PropertyRef Name="City_id_city" />
+      <PropertyRef Name="Cinema_id_cinema" />
+    </Key>
+    <Property Name="City_id_city" Type="int" Nullable="false" />
+    <Property Name="Cinema_id_cinema" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="id_country" />
+    </Key>
+    <Property Name="id_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "sss.dbo.Country" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="id_country" />
+      <PropertyRef Name="country" />
+    </Key>
+    <Property Name="id_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Cities_dbo_Countries_Country_id_country">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+    <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="id_country" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="Country_id_country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CityCinemas_dbo_Cinemas_Cinema_id_cinema">
+    <End Role="Cinemas" Type="Self.Cinemas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CityCinemas" Type="Self.CityCinemas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cinemas">
+        <PropertyRef Name="id_cinema" />
+      </Principal>
+      <Dependent Role="CityCinemas">
+        <PropertyRef Name="Cinema_id_cinema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CityCinemas_dbo_Cities_City_id_city">
+    <End Role="Cities" Type="Self.Cities" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CityCinemas" Type="Self.CityCinemas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="id_city" />
+      </Principal>
+      <Dependent Role="CityCinemas">
+        <PropertyRef Name="City_id_city" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище sssModelContainer">
+    <EntitySet Name="Cinemas" EntityType="Self.Cinemas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CityCinemas" EntityType="Self.CityCinemas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cinema" EntityType="Self.Cinema" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Cinema].[id_cinema] AS [id_cinema], 
+[Cinema].[cinema] AS [cinema]
+FROM [dbo].[Cinema] AS [Cinema]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="City" EntityType="Self.City" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[City].[id_city] AS [id_city], 
+[City].[city] AS [city]
+FROM [dbo].[City] AS [City]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Country" EntityType="Self.Country" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Country].[id_country] AS [id_country], 
+[Country].[country] AS [country]
+FROM [dbo].[Country] AS [Country]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_dbo_Cities_dbo_Countries_Country_id_country" Association="Self.FK_dbo_Cities_dbo_Countries_Country_id_country">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CityCinemas_dbo_Cinemas_Cinema_id_cinema" Association="Self.FK_dbo_CityCinemas_dbo_Cinemas_Cinema_id_cinema">
+      <End Role="Cinemas" EntitySet="Cinemas" />
+      <End Role="CityCinemas" EntitySet="CityCinemas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CityCinemas_dbo_Cities_City_id_city" Association="Self.FK_dbo_CityCinemas_dbo_Cities_City_id_city">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="CityCinemas" EntitySet="CityCinemas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

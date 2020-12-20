@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище cinemaModelContainer" CdmEntityContainer="DBModel">
+    <EntitySetMapping Name="cinema">
+      <EntityTypeMapping TypeName="cinemaModel.cinema">
+        <MappingFragment StoreEntitySet="cinema">
+          <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+          <ScalarProperty Name="cinema1" ColumnName="cinema" />
+          <ScalarProperty Name="id_city" ColumnName="id_city" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cinemas">
+      <EntityTypeMapping TypeName="cinemaModel.Cinemas">
+        <MappingFragment StoreEntitySet="Cinemas">
+          <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+          <ScalarProperty Name="cinema" ColumnName="cinema" />
+          <ScalarProperty Name="id_city" ColumnName="id_city" />
+          <ScalarProperty Name="Cinema_id_cinema" ColumnName="Cinema_id_cinema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="cinemaModel.Cities">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="id_city" ColumnName="id_city" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="id_country" ColumnName="id_country" />
+          <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+          <ScalarProperty Name="City_id_city" ColumnName="City_id_city" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="city">
+      <EntityTypeMapping TypeName="cinemaModel.city">
+        <MappingFragment StoreEntitySet="city">
+          <ScalarProperty Name="id_city" ColumnName="id_city" />
+          <ScalarProperty Name="city1" ColumnName="city" />
+          <ScalarProperty Name="id_country" ColumnName="id_country" />
+          <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="cinemaModel.Countries">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="id_country" ColumnName="id_country" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="Country_id_country" ColumnName="Country_id_country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="country">
+      <EntityTypeMapping TypeName="cinemaModel.country">
+        <MappingFragment StoreEntitySet="country">
+          <ScalarProperty Name="id_country" ColumnName="id_country" />
+          <ScalarProperty Name="country1" ColumnName="country" />
+          <ScalarProperty Name="id_city" ColumnName="id_city" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
